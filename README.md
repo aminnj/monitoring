@@ -1,4 +1,3 @@
-
 ## Job monitoring with grafana
 
 Make a working area
@@ -6,6 +5,9 @@ Make a working area
 mkdir -p ~/monitoring
 cd ~/monitoring
 ```
+
+Grafana and elasticsearch can be run in a GNU screen. Ingestion scripts
+can be run in a screen as well, or in a crontab.
 
 ### Set up elasticsearch
 
@@ -51,10 +53,13 @@ print(response)
 ```
 The `mytest` index can be dropped later with `curl -X DELETE "localhost:9200/mytest?pretty"`.
 
-Actual ingestion (into the `condor` index) with the [condor.py](ingest/condor.py) script.
+Actual ingestion (into the `condor` index) is done with the [condor.py](ingest/condor.py) script.
 ```bash
 source myenv/bin/activate
-for i in `seq 1 10000`; do python condor.py ; sleep 20m; done
+for i in `seq 1 10000`; do 
+    python condor.py
+    sleep 20m
+done
 ```
 
 
@@ -88,3 +93,4 @@ then `Type` = `Query`, `Name`/`Label` = `username`, ES `Data source`,
 and finally make sure that the preview shows some usernames. 
 Finally, make sure the `Query` string is `$username` for dashboards where you want to filter by username.
 
+A backup of the latest dashboard is in [dashboard_condor.json](grafana/settings/dashboard_condor.json).
