@@ -3,18 +3,19 @@ import subprocess
 import ast
 import pytz
 from elasticsearch import Elasticsearch
+import json
 
-es_host = "localhost:9200"
-index = "condor"
+from config import condor_index, es_host
+
 extra = ""
 
 # extra = "-limit 2"
 # since = 0
 
 es = Elasticsearch(es_host)
-result = es.search(index=index, body={"query": {"match_all": {}}, "size": 1, "sort":[{"CompletionDate": {"order":"desc"}}]})
+result = es.search(index=condor_index, body={"aggs":{"latest":{"max":{"field":"CompletionDate"}}}}, size=0)
 try:
-    since = int(result["hits"]["hits"][0]["sort"][0]/1e3)
+    since = int(result["aggregations"]["latest"]["value"]/1e3)
     print(f"Grabbing records since {since}")
 except:
     print("Grabbing as many records as possible")
@@ -39,6 +40,10 @@ for hostname in hostnames:
     rows.extend(ast.literal_eval(out))
 
 print(f"Fetched {len(rows)} rows from condor_history")
+
+# with open("latest.jsonl", "a") as fh:
+#     for row in rows:
+#         fh.write(json.dumps(row) + "\n")
 
 body = []
 for row in rows:
@@ -68,8 +73,7 @@ for row in rows:
     body.append(row)
 
 if body:
-    # response = es.bulk(index=index, doc_type=doc_type, body=body)
-    response = es.bulk(index=index, body=body)
+    response = es.bulk(index=condor_index, body=body)
     print(f"Ingested {len(response['items'])} rows into elasticsearch in {response['took']} ms")
     if response["errors"]:
         print("ERRORS:")

@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 3,
-  "iteration": 1621034351799,
+  "iteration": 1621107369101,
   "links": [],
   "panels": [
     {
@@ -36,14 +36,14 @@
     },
     {
       "datasource": "EScondor",
-      "description": "Calculated as CumulativeRemoteUserCpu/RemoteWallClockTime/RequestCpus",
+      "description": "",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
+        "w": 4,
         "x": 0,
         "y": 1
       },
@@ -51,7 +51,7 @@
       "interval": "10min",
       "maxDataPoints": null,
       "options": {
-        "content": "### Some notes...\n* These are metrics for completed jobs. The time axis is the time of completion.\n* The minimum bin size is 10 minutes.\n* Metrics are updated every 20 minutes.\n* You can filter by `username` above",
+        "content": "### Some notes...\n* These are metrics for completed jobs. The time axis is the time of completion.\n* Metrics are updated every 20 minutes.\n* You can filter by `username` above",
         "mode": "markdown"
       },
       "pluginVersion": "7.5.6",
@@ -101,6 +101,291 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 4,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 20,
+      "interval": "20min",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:1191",
+          "alias": "Average cpueff",
+          "color": "#5794F2",
+          "fillBelowTo": "Std Dev Lower cpueff"
+        },
+        {
+          "$$hashKey": "object:1196",
+          "alias": "Std Dev Lower cpueff",
+          "lines": false
+        },
+        {
+          "$$hashKey": "object:1207",
+          "alias": "Std Dev Upper cpueff",
+          "color": "#5794F2",
+          "fillBelowTo": "Average cpueff",
+          "lines": false
+        },
+        {
+          "$$hashKey": "object:1212",
+          "alias": "Average cpueff",
+          "color": "#5794F2",
+          "fill": 0,
+          "lines": true,
+          "linewidth": 4
+        },
+        {
+          "$$hashKey": "object:1339"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "CompletionDate",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "cpueff",
+              "id": "1",
+              "meta": {
+                "avg": true,
+                "std_deviation": false,
+                "std_deviation_bounds_lower": true,
+                "std_deviation_bounds_upper": true
+              },
+              "settings": {
+                "sigma": "1"
+              },
+              "type": "extended_stats"
+            }
+          ],
+          "query": "LastRemoteHost=\"internal.cloudapp.net\" AND $username",
+          "refId": "A",
+          "timeField": "CompletionDate"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Avg cpu eff of azure jobs",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:620",
+          "decimals": null,
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1.1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:621",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "EScondor",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 13,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 18,
+      "interval": "20min",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": false
+      },
+      "percentage": true,
+      "pluginVersion": "7.5.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "Owner.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "CompletionDate",
+              "id": "2",
+              "settings": {
+                "interval": "1h"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "id": "3",
+              "type": "count"
+            }
+          ],
+          "query": "$username",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "timeField": "CompletionDate"
+        }
+      ],
+      "thresholds": [],
+      "time": {
+        "from": "now-7d",
+        "to": "now"
+      },
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Hourly completed jobs (stacked)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:316",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:317",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": "EScondor",
       "fieldConfig": {
         "defaults": {},
@@ -111,12 +396,12 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 8,
-        "y": 1
+        "x": 0,
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 2,
-      "interval": "10min",
+      "interval": "20min",
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -130,6 +415,7 @@
       },
       "lines": true,
       "linewidth": 1,
+      "maxDataPoints": null,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -230,254 +516,6 @@
         "defaults": {},
         "overrides": []
       },
-      "fill": 6,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "hiddenSeries": false,
-      "id": 13,
-      "interval": "10min",
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.6",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "",
-          "bucketAggs": [
-            {
-              "field": "LastRemoteHost.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": "0",
-                "order": "desc",
-                "orderBy": "_count",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "CompletionDate",
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "id": "3",
-              "type": "count"
-            }
-          ],
-          "query": "$username",
-          "queryType": "randomWalk",
-          "refId": "A",
-          "timeField": "CompletionDate"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "T2s (stacked)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "EScondor",
-      "description": "Calculated as CumulativeRemoteUserCpu/RemoteWallClockTime/RequestCpus",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 9
-      },
-      "hiddenSeries": false,
-      "id": 15,
-      "interval": "10min",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "maxDataPoints": null,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.6",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "",
-          "bucketAggs": [
-            {
-              "field": "Owner.keyword",
-              "id": "3",
-              "settings": {
-                "min_doc_count": "0",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "cpueff",
-              "id": "1",
-              "type": "avg"
-            }
-          ],
-          "query": "$username",
-          "queryType": "randomWalk",
-          "refId": "A",
-          "timeField": "CompletionDate"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "CPU efficiency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "EScondor",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
@@ -488,7 +526,7 @@
       },
       "hiddenSeries": false,
       "id": 9,
-      "interval": "10min",
+      "interval": "20min",
       "legend": {
         "avg": false,
         "current": false,
@@ -499,7 +537,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "maxDataPoints": null,
       "nullPointMode": "null",
       "options": {
@@ -597,6 +635,132 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "EScondor",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 8,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 9
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "interval": "20min",
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 0,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "LastRemoteHost.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "CompletionDate",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "id": "3",
+              "type": "count"
+            }
+          ],
+          "query": "$username",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "timeField": "CompletionDate"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "T2s (stacked)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:681",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:682",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "EScondor",
       "description": "Calculated as CumulativeRemoteUserCpu/RemoteWallClockTime/RequestCpus",
       "fieldConfig": {
         "defaults": {},
@@ -607,12 +771,12 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 16,
-        "y": 9
+        "x": 0,
+        "y": 17
       },
       "hiddenSeries": false,
-      "id": 16,
-      "interval": "10min",
+      "id": 15,
+      "interval": "20m",
       "legend": {
         "avg": false,
         "current": false,
@@ -623,7 +787,133 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
+      "maxDataPoints": null,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.6",
+      "pointradius": 0.5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "Owner.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "cpueff",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "$username",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "timeField": "CompletionDate"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU efficiency",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2647",
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1.5",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2648",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "EScondor",
+      "description": "Calculated as CumulativeRemoteUserCpu/RemoteWallClockTime/RequestCpus",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 17
+      },
+      "hiddenSeries": false,
+      "id": 16,
+      "interval": "20min",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
       "maxDataPoints": null,
       "nullPointMode": "null",
       "options": {
@@ -731,17 +1021,17 @@
         "defaults": {},
         "overrides": []
       },
-      "fill": 6,
+      "fill": 8,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 0,
+        "x": 16,
         "y": 17
       },
       "hiddenSeries": false,
       "id": 14,
-      "interval": "10min",
+      "interval": "20min",
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -754,7 +1044,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 0,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -778,7 +1068,7 @@
               "settings": {
                 "min_doc_count": "0",
                 "order": "desc",
-                "orderBy": "_term",
+                "orderBy": "3",
                 "size": "10"
               },
               "type": "terms"
@@ -824,6 +1114,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:103",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -832,6 +1123,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:104",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -855,17 +1147,17 @@
         "defaults": {},
         "overrides": []
       },
-      "fill": 6,
+      "fill": 8,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 8,
-        "y": 17
+        "x": 0,
+        "y": 25
       },
       "hiddenSeries": false,
       "id": 17,
-      "interval": "10min",
+      "interval": "20min",
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -878,7 +1170,8 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 0,
+      "maxDataPoints": null,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -900,7 +1193,7 @@
               "field": "submithost.keyword",
               "id": "4",
               "settings": {
-                "min_doc_count": "0",
+                "min_doc_count": "2",
                 "order": "desc",
                 "orderBy": "_count",
                 "size": "4"
@@ -970,16 +1263,16 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "30m",
   "schemaVersion": 27,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": "*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -988,7 +1281,7 @@
           ]
         },
         "datasource": "EScondor",
-        "definition": "{\"find\": \"terms\", \"field\": \"Owner.keyword\", \"size\": 50}",
+        "definition": "{\"find\": \"terms\", \"field\": \"Owner.keyword\", \"size\": 40}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1001,6 +1294,11 @@
             "selected": true,
             "text": "All",
             "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "bsathian",
+            "value": "bsathian"
           },
           {
             "selected": false,
@@ -1041,9 +1339,14 @@
             "selected": false,
             "text": "smay",
             "value": "smay"
+          },
+          {
+            "selected": false,
+            "text": "usarica",
+            "value": "usarica"
           }
         ],
-        "query": "{\"find\": \"terms\", \"field\": \"Owner.keyword\", \"size\": 50}",
+        "query": "{\"find\": \"terms\", \"field\": \"Owner.keyword\", \"size\": 40}",
         "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
@@ -1064,5 +1367,5 @@
   "timezone": "",
   "title": "Condor",
   "uid": "rOosrPCMk",
-  "version": 41
+  "version": 69
 }
