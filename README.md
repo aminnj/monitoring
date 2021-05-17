@@ -39,7 +39,7 @@ source myenv/bin/activate
 pip install "elasticsearch>=7.0.0,<8.0.0" "elasticsearch-dsl>=7.0.0,<8.0.0" pytz tqdm requests
 ```
 
-And to test...
+And to test it, make a dummy index and insert a document with python:
 ```python
 from elasticsearch import Elasticsearch
 import datetime
@@ -51,6 +51,31 @@ response = es.index(
 )
 print(response)
 ```
+or with Bash:
+```bash
+curl -X POST "localhost:9200/mytest/docs?pretty" -H 'Content-Type: application/json' -d'
+{
+    "date": "'$(date +%s000)'",
+    "cpu": 20
+}
+'
+```
+
+To read it back,
+```python
+from elasticsearch import Elasticsearch
+es = Elasticsearch("localhost:9201")
+response = es.search(index="mytest", doc_type="docs", body={})
+print(response)
+```
+
+or with SQL:
+```bash
+curl -X POST "localhost:9201/_sql?format=txt" -H 'Content-Type: application/json' -d'{"query":
+    "SELECT * FROM mytest ORDER BY cpu DESC LIMIT 5"
+}'
+```
+
 The `mytest` index can be dropped later with `curl -X DELETE "localhost:9201/mytest?pretty"`.
 
 Actual ingestion into the `condor` index is done with the [condor.py](ingest/condor.py) script
