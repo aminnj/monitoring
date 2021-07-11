@@ -176,6 +176,8 @@ fi
 eshost="localhost:9201"
 curl -X POST "$eshost/_sql?format=txt" -H 'Content-Type: application/json' -d'{"query": "'"$query"'"}'
 ```
+If run without any arguments, shows all table names. Can then print table schema with
+`esql "describe condor"`, for example.
 
 * Top users by day
 ```bash
