@@ -1,7 +1,7 @@
 es_host = "localhost:9201"
 condor_index = "condor"
+userprio_index = "userprio"
+status_index = "status"
 hadoop_index = "hadoop"
-
-# short=`hdfs getconf -namenodes`
-# namenode_host is then ${short}.t2.ucsd.edu:50070
-namenode_host = "REPLACE_ME"
+transferstats_index = "transferstats"
+namenode_host = "proxy-1.t2.ucsd.edu:50070"
